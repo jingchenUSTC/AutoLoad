@@ -22,10 +22,12 @@ public class PullableListView extends ListView implements Pullable
 	public static final int INIT = 0;
 	public static final int LOADING = 1;
 	private OnLoadListener mOnLoadListener;
+	private View mLoadmoreView;
 	private ImageView mLoadingView;
 	private TextView mStateTextView;
 	private int state = INIT;
 	private boolean canLoad = true;
+	private boolean autoLoad = true;
 	private AnimationDrawable mLoadAnim;
 
 	public PullableListView(Context context)
@@ -48,13 +50,29 @@ public class PullableListView extends ListView implements Pullable
 
 	private void init(Context context)
 	{
-		View view = LayoutInflater.from(context).inflate(R.layout.load_more,
+		mLoadmoreView = LayoutInflater.from(context).inflate(R.layout.load_more,
 				null);
-		mLoadingView = (ImageView) view.findViewById(R.id.loading_icon);
+		mLoadingView = (ImageView) mLoadmoreView.findViewById(R.id.loading_icon);
 		mLoadingView.setBackgroundResource(R.anim.loading_anim);
 		mLoadAnim = (AnimationDrawable) mLoadingView.getBackground();
-		mStateTextView = (TextView) view.findViewById(R.id.loadstate_tv);
-		addFooterView(view, null, false);
+		mStateTextView = (TextView) mLoadmoreView.findViewById(R.id.loadstate_tv);
+		mLoadmoreView.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View v)
+			{
+				//点击加载
+				if(state != LOADING){
+					load();
+				}
+			}
+		});
+		addFooterView(mLoadmoreView, null, false);
+	}
+	
+	public void enableAutoLoad(boolean enable){
+		autoLoad = enable;
 	}
 
 	@Override
@@ -89,11 +107,13 @@ public class PullableListView extends ListView implements Pullable
 	private void checkLoad()
 	{
 		if (reachBottom() && mOnLoadListener != null && state != LOADING
-				&& canLoad)
-		{
-			mOnLoadListener.onLoad(this);
-			changeState(LOADING);
-		}
+				&& canLoad && autoLoad)
+			load();
+	}
+	
+	private void load(){
+		mOnLoadListener.onLoad(this);
+		changeState(LOADING);
 	}
 
 	private void changeState(int state)
@@ -147,19 +167,18 @@ public class PullableListView extends ListView implements Pullable
 	/**
 	 * @return footerview可见时返回true，否则返回false
 	 */
-	public boolean reachBottom()
+	private boolean reachBottom()
 	{
 		if (getCount() == 0)
 		{
-			// 没有item的时候也可以上拉加载
 			return true;
 		} else if (getLastVisiblePosition() == (getCount() - 1))
 		{
-			// 滑到底部了
+			// 滑到底部，且頂部不是第0个，也就是说item数超过一屏后才能自动加载，否则只能点击加载
 			if (getChildAt(getLastVisiblePosition() - getFirstVisiblePosition()) != null
 					&& getChildAt(
 							getLastVisiblePosition()
-									- getFirstVisiblePosition()).getTop() < getMeasuredHeight())
+									- getFirstVisiblePosition()).getTop() < getMeasuredHeight() && !canPullDown())
 				return true;
 		}
 		return false;
