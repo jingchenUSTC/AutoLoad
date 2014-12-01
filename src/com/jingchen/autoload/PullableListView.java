@@ -71,8 +71,22 @@ public class PullableListView extends ListView implements Pullable
 		addFooterView(mLoadmoreView, null, false);
 	}
 	
+	/**
+	 * 是否开启自动加载
+	 * @param enable true启用，false禁用
+	 */
 	public void enableAutoLoad(boolean enable){
 		autoLoad = enable;
+	}
+	
+	/**
+	 * 是否显示加载更多
+	 * @param v true显示，false不显示
+	 */
+	public void setLoadmoreVisible(boolean v){
+		if(v)
+			mLoadmoreView.setVisibility(View.VISIBLE);
+		else mLoadmoreView.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
