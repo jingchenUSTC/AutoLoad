@@ -130,8 +130,8 @@ public class PullableListView extends ListView implements Pullable
 	}
 	
 	private void load(){
-		mOnLoadListener.onLoad(this);
 		changeState(LOADING);
+		mOnLoadListener.onLoad(this);
 	}
 
 	private void changeState(int state)
