@@ -85,8 +85,12 @@ public class PullableListView extends ListView implements Pullable
 	 */
 	public void setLoadmoreVisible(boolean v){
 		if(v)
-			mLoadmoreView.setVisibility(View.VISIBLE);
-		else mLoadmoreView.setVisibility(View.INVISIBLE);
+			{
+			addFooterView(mLoadmoreView, null, false);
+			}
+		else {
+			removeFooterView(mLoadmoreView);
+		}
 	}
 
 	@Override
