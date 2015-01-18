@@ -113,9 +113,10 @@ public class PullToRefreshLayout extends RelativeLayout
 				if (state != REFRESHING)
 					changeState(INIT);
 				timer.cancel();
+				requestLayout();
 			}
 			// 刷新布局,会自动调用onLayout
-			requestLayout();
+			if(pullDownY != 0)requestLayout();
 		}
 
 	};
@@ -280,7 +281,7 @@ public class PullToRefreshLayout extends RelativeLayout
 			// 根据下拉距离改变比例
 			radio = (float) (2 + 2 * Math.tan(Math.PI / 2 / getMeasuredHeight()
 					* (pullDownY)));
-			requestLayout();
+			if(pullDownY != 0)requestLayout();
 			if (pullDownY <= refreshDist && state == RELEASE_TO_REFRESH)
 			{
 				// 如果下拉距离没达到刷新的距离且当前状态是释放刷新，改变状态为下拉刷新
