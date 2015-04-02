@@ -11,9 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 /**
- * Èç¹û²»ĞèÒªÏÂÀ­Ë¢ĞÂÖ±½ÓÔÚcanPullDownÖĞ·µ»Øfalse£¬ÕâÀïµÄ×Ô¶¯¼ÓÔØºÍÏÂÀ­Ë¢ĞÂÃ»ÓĞ³åÍ»£¬Í¨¹ıÔö¼ÓÔÚÎ²²¿µÄfooterviewÊµÏÖ×Ô¶¯¼ÓÔØ£¬
- * ËùÒÔÔÚÊ¹ÓÃÖĞ²»ÒªÔÙ¶¯footerviewÁË
- * ¸ü¶àÏê½â¼û²©¿Íhttp://blog.csdn.net/zhongkejingwang/article/details/38963177
+ * å¦‚æœä¸éœ€è¦ä¸‹æ‹‰åˆ·æ–°ç›´æ¥åœ¨canPullDownä¸­è¿”å›falseï¼Œè¿™é‡Œçš„è‡ªåŠ¨åŠ è½½å’Œä¸‹æ‹‰åˆ·æ–°æ²¡æœ‰å†²çªï¼Œé€šè¿‡å¢åŠ åœ¨å°¾éƒ¨çš„footerviewå®ç°è‡ªåŠ¨åŠ è½½ï¼Œ
+ * æ‰€ä»¥åœ¨ä½¿ç”¨ä¸­ä¸è¦å†åŠ¨footerviewäº†
+ * æ›´å¤šè¯¦è§£è§åšå®¢http://blog.csdn.net/zhongkejingwang/article/details/38963177
  * @author chenjing
  * 
  */
@@ -62,7 +62,7 @@ public class PullableListView extends ListView implements Pullable
 			@Override
 			public void onClick(View v)
 			{
-				//µã»÷¼ÓÔØ
+				//ç‚¹å‡»åŠ è½½
 				if(state != LOADING){
 					load();
 				}
@@ -72,16 +72,16 @@ public class PullableListView extends ListView implements Pullable
 	}
 	
 	/**
-	 * ÊÇ·ñ¿ªÆô×Ô¶¯¼ÓÔØ
-	 * @param enable trueÆôÓÃ£¬false½ûÓÃ
+	 * æ˜¯å¦å¼€å¯è‡ªåŠ¨åŠ è½½
+	 * @param enable trueå¯ç”¨ï¼Œfalseç¦ç”¨
 	 */
 	public void enableAutoLoad(boolean enable){
 		autoLoad = enable;
 	}
 	
 	/**
-	 * ÊÇ·ñÏÔÊ¾¼ÓÔØ¸ü¶à
-	 * @param v trueÏÔÊ¾£¬false²»ÏÔÊ¾
+	 * æ˜¯å¦æ˜¾ç¤ºåŠ è½½æ›´å¤š
+	 * @param v trueæ˜¾ç¤ºï¼Œfalseä¸æ˜¾ç¤º
 	 */
 	public void setLoadmoreVisible(boolean v){
 		if(v)
@@ -99,11 +99,11 @@ public class PullableListView extends ListView implements Pullable
 		switch (ev.getActionMasked())
 		{
 		case MotionEvent.ACTION_DOWN:
-			// °´ÏÂµÄÊ±ºò½ûÖ¹×Ô¶¯¼ÓÔØ
+			// æŒ‰ä¸‹çš„æ—¶å€™ç¦æ­¢è‡ªåŠ¨åŠ è½½
 			canLoad = false;
 			break;
 		case MotionEvent.ACTION_UP:
-			// ËÉ¿ªÊÖÅĞ¶ÏÊÇ·ñ×Ô¶¯¼ÓÔØ
+			// æ¾å¼€æ‰‹åˆ¤æ–­æ˜¯å¦è‡ªåŠ¨åŠ è½½
 			canLoad = true;
 			checkLoad();
 			break;
@@ -115,12 +115,12 @@ public class PullableListView extends ListView implements Pullable
 	protected void onScrollChanged(int l, int t, int oldl, int oldt)
 	{
 		super.onScrollChanged(l, t, oldl, oldt);
-		// ÔÚ¹ö¶¯ÖĞÅĞ¶ÏÊÇ·ñÂú×ã×Ô¶¯¼ÓÔØÌõ¼ş
+		// åœ¨æ»šåŠ¨ä¸­åˆ¤æ–­æ˜¯å¦æ»¡è¶³è‡ªåŠ¨åŠ è½½æ¡ä»¶
 		checkLoad();
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÂú×ã×Ô¶¯¼ÓÔØÌõ¼ş
+	 * åˆ¤æ–­æ˜¯å¦æ»¡è¶³è‡ªåŠ¨åŠ è½½æ¡ä»¶
 	 */
 	private void checkLoad()
 	{
@@ -154,7 +154,7 @@ public class PullableListView extends ListView implements Pullable
 	}
 
 	/**
-	 * Íê³É¼ÓÔØ
+	 * å®ŒæˆåŠ è½½
 	 */
 	public void finishLoading()
 	{
@@ -166,12 +166,12 @@ public class PullableListView extends ListView implements Pullable
 	{
 		if (getCount() == 0)
 		{
-			// Ã»ÓĞitemµÄÊ±ºòÒ²¿ÉÒÔÏÂÀ­Ë¢ĞÂ
+			// æ²¡æœ‰itemçš„æ—¶å€™ä¹Ÿå¯ä»¥ä¸‹æ‹‰åˆ·æ–°
 			return true;
 		} else if (getFirstVisiblePosition() == 0
 				&& getChildAt(0).getTop() >= 0)
 		{
-			// »¬µ½ListViewµÄ¶¥²¿ÁË
+			// æ»‘åˆ°ListViewçš„é¡¶éƒ¨äº†
 			return true;
 		} else
 			return false;
@@ -183,7 +183,7 @@ public class PullableListView extends ListView implements Pullable
 	}
 
 	/**
-	 * @return footerview¿É¼ûÊ±·µ»Øtrue£¬·ñÔò·µ»Øfalse
+	 * @return footerviewå¯è§æ—¶è¿”å›trueï¼Œå¦åˆ™è¿”å›false
 	 */
 	private boolean reachBottom()
 	{
@@ -192,7 +192,7 @@ public class PullableListView extends ListView implements Pullable
 			return true;
 		} else if (getLastVisiblePosition() == (getCount() - 1))
 		{
-			// »¬µ½µ×²¿£¬ÇÒí”²¿²»ÊÇµÚ0¸ö£¬Ò²¾ÍÊÇËµitemÊı³¬¹ıÒ»ÆÁºó²ÅÄÜ×Ô¶¯¼ÓÔØ£¬·ñÔòÖ»ÄÜµã»÷¼ÓÔØ
+			// æ»‘åˆ°åº•éƒ¨ï¼Œä¸”é ‚éƒ¨ä¸æ˜¯ç¬¬0ä¸ªï¼Œä¹Ÿå°±æ˜¯è¯´itemæ•°è¶…è¿‡ä¸€å±åæ‰èƒ½è‡ªåŠ¨åŠ è½½ï¼Œå¦åˆ™åªèƒ½ç‚¹å‡»åŠ è½½
 			if (getChildAt(getLastVisiblePosition() - getFirstVisiblePosition()) != null
 					&& getChildAt(
 							getLastVisiblePosition()

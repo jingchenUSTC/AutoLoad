@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.jingchen.autoload.PullableListView.OnLoadListener;
 
 /**
- * ¸ü¶àÏê½â¼û²©¿Íhttp://blog.csdn.net/zhongkejingwang/article/details/38963177
+ * æ›´å¤šè¯¦è§£è§åšå®¢http://blog.csdn.net/zhongkejingwang/article/details/38963177
  * @author chenjing
  *
  */
@@ -39,14 +39,14 @@ public class MainActivity extends Activity implements OnLoadListener
 	}
 
 	/**
-	 * ListView³õÊ¼»¯·½·¨
+	 * ListViewåˆå§‹åŒ–æ–¹æ³•
 	 */
 	private void initListView()
 	{
 		List<String> items = new ArrayList<String>();
 		for (int i = 0; i < 10; i++)
 		{
-			items.add("ÕâÀïÊÇitem " + i);
+			items.add("è¿™é‡Œæ˜¯item " + i);
 		}
 		adapter = new MyAdapter(this, items);
 		listView.setAdapter(adapter);
@@ -88,8 +88,8 @@ public class MainActivity extends Activity implements OnLoadListener
 			public void handleMessage(Message msg)
 			{
 				for (int i = 0; i < 5; i++)
-					adapter.addItem("ÕâÀïÊÇ×Ô¶¯¼ÓÔØ½øÀ´µÄitem");
-				// Ç§Íò±ğÍüÁË¸æËß¿Ø¼ş¼ÓÔØÍê±ÏÁËÅ¶£¡
+					adapter.addItem("è¿™é‡Œæ˜¯è‡ªåŠ¨åŠ è½½è¿›æ¥çš„item");
+				// åƒä¸‡åˆ«å¿˜äº†å‘Šè¯‰æ§ä»¶åŠ è½½å®Œæ¯•äº†å“¦ï¼
 				pullableListView.finishLoading();
 			}
 		}.sendEmptyMessageDelayed(0, 5000);
